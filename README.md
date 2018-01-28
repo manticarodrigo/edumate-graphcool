@@ -1,1 +1,1 @@
-Graphcool files for Edumate.
+Graphcool server files for Edumate.
