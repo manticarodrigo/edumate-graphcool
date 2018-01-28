@@ -1,0 +1,53 @@
+# projectId: cjcxq8j9z1zqk0152w2jyz4ma
+# version: 11
+
+type File @model {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type User @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String! @isUnique
+  password: String!
+  firstName: String!
+  lastName: String!
+  imageUrl: String!
+}
+
+type Course @model {
+  id: ID! @isUnique
+  name: String!
+  description: String
+  tasks: [Task!]! @relation(name: "CourseTasks")
+}
+
+type Task @model {
+  id: ID! @isUnique
+  name: String!
+  description: String
+  done: Boolean
+  course: Course @relation(name: "CourseTasks")
+}
+
+type Post @model {
+  id: ID! @isUnique
+  text: String!
+  imageUrl: String
+}
+
+type Article @model {
+  id: ID! @isUnique
+  title: String!
+  description: String
+  url: String
+}
+
