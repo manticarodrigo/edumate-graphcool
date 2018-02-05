@@ -1,0 +1,3 @@
+targets:
+  edumate-graphql: shared-us-west-2/cjcyysjgy13rn0150zufcr4jq
+  default: edumate-graphql

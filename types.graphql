@@ -2,13 +2,13 @@
 # version: 11
 
 type File @model {
-  contentType: String!
-  createdAt: DateTime!
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  contentType: String!
   name: String!
   secret: String! @isUnique
   size: Int!
-  updatedAt: DateTime!
   url: String! @isUnique
 }
 
@@ -17,21 +17,33 @@ type User @model {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String! @isUnique
+  username: String! @isUnique
   password: String!
   firstName: String!
   lastName: String!
-  imageUrl: String!
+  imageUrl: String
+  posts: [Post!]! @relation(name: "UserPosts")
+  coursesTaught: [Course!]! @relation(name: "CourseInstructors")
+  coursesTaken: [Course!]! @relation(name: "CourseStudents")
+  votesCasted: [PollOption!]! @relation(name: "PollOptionVotes")
 }
 
 type Course @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
-  description: String
+  description: String!
+  imageUrl: String
+  instructors: [User!]! @relation(name: "CourseInstructors")
+  students: [User!]! @relation(name: "CourseStudents")
   tasks: [Task!]! @relation(name: "CourseTasks")
 }
 
 type Task @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   description: String
   done: Boolean
@@ -40,14 +52,36 @@ type Task @model {
 
 type Post @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   text: String!
   imageUrl: String
+  author: User! @relation(name: "UserPosts")
+}
+
+type Poll @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  dateLimit: DateTime
+  countLimit: Int
+  options: [PollOption!]! @relation(name: "PollOptions")
+}
+
+type PollOption @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  poll: Poll! @relation(name: "PollOptions")
+  votes: [User!]! @relation(name: "PollOptionVotes")
 }
 
 type Article @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   title: String!
   description: String
   url: String
 }
-
