@@ -1,6 +1,11 @@
 type AuthenticateUserPayload {
-  id: ID!
   token: String!
+  id: ID!
+  email: String!
+  username: String!
+  firstName: String!
+  lastName: String!
+  imageUrl: String
 }
 
 extend type Mutation {
