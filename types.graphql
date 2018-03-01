@@ -57,14 +57,15 @@ type Post @model {
   text: String!
   imageUrl: String
   author: User! @relation(name: "UserPosts")
+  poll: Poll @relation(name: "PostPoll")
 }
 
 type Poll @model {
   id: ID! @isUnique
   createdAt: DateTime!
   updatedAt: DateTime!
-  dateLimit: DateTime
-  countLimit: Int
+  endDate: DateTime
+  post: Post! @relation(name: "PostPoll")
   options: [PollOption!]! @relation(name: "PollOptions")
 }
 
